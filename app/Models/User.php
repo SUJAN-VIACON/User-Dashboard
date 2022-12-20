@@ -52,4 +52,12 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Country::class);
     }
+
+    // * Accessors
+
+    public function getNameAttribute()
+    {
+        return "$this->first_name $this->last_name";
+    }
+
 }
