@@ -21,7 +21,7 @@ class UserTable extends DataTableComponent
         return [
             Column::make("Id", "id")
                 ->sortable()->searchable(),
-            Column::make("Name", "id")
+            Column::make("Name", "first_name")
                 ->sortable()
                 ->format(function ($value, $row, $column) {
                     if ($row->first_name && $row->last_name) return $row->name;
@@ -46,10 +46,10 @@ class UserTable extends DataTableComponent
                     return $value->format('M d, Y H:i:s A');
                 })->html()
                 ->sortable(),
-            Column::make("id")
+            Column::make("Edit","id")
                 ->format(function ($value, $row, $column) {
-                    $editRoute = route('users.edit',$value);
-                    return "<a href='$editRoute' class=''>Edit</a>";
+                    $editRoute = route('users.edit', $value);
+                    return "<a style='background: green; border-radius: 0.3rem; padding: 0.5rem 1.5rem' href='$editRoute' class=''>Edit</a>";
                 })->html()
                 ->sortable()
         ];

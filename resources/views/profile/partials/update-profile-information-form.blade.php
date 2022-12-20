@@ -1,12 +1,8 @@
 <section>
     <header>
         <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-            {{ __('Profile Information') }}
+            {{ __('User Information') }}
         </h2>
-
-        <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-            {{ __("Update your account's profile information and email address.") }}
-        </p>
     </header>
 
     <form id="send-verification" method="post" action="{{ route('verification.send') }}">
@@ -48,8 +44,11 @@
         <div class="flex items-center w-full gap-4 my-5">
             <div class="">
                 <div class="flex items-center gap-3">
-                    <x-text-input  id="gender-male" type="radio"
-                        name="gender" :value="old('gender')" required autofocus />
+                    @php
+                        $isChecked = $user->gender == 'male';
+                    @endphp
+                    <x-text-input id="gender-male" type="radio" :checked="$isChecked" :value="$use->gender" name="gender"
+                        value="male" required autofocus />
                     <x-input-label for="gender-male" value="male" />
                 </div>
 
@@ -58,8 +57,11 @@
 
             <div class="">
                 <div class="flex items-center gap-3">
-                    <x-text-input id="gender-female" type="radio" name="gender" :value="old('gender')" required
-                        autofocus />
+                    @php
+                        $isChecked = $user->gender == 'female';
+                    @endphp
+                    <x-text-input :value="$use->gender" :checked="$isChecked" id="gender-female" type="radio" name="gender"
+                        value="female" required autofocus />
                     <x-input-label for="gender-female" value="female" />
                 </div>
 
@@ -72,7 +74,7 @@
             <x-input-label for="country" :value="__('Select Your Country')" />
             <x-selector-input :data="App\Models\Country::all()
                 ->pluck('name', 'id')
-                ->toArray()" name="country_id" id="country_id" />
+                ->toArray()" name="country_id" id="country_id" :value="$user->country_id" />
             <x-input-error :messages="$errors->get('country_id')" class="mt-2" />
         </div>
 

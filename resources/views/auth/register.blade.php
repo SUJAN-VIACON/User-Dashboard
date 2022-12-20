@@ -53,7 +53,7 @@
         <div class="flex items-center w-full gap-4 my-5">
             <div class="">
                 <div class="flex items-center gap-3">
-                    <x-text-input id="gender-male" type="radio" name="gender" :value="old('gender')" required
+                    <x-text-input id="gender-male" type="radio" name="gender" value="male" required
                         autofocus />
                     <x-input-label for="gender-male" value="Male" />
                 </div>
@@ -63,7 +63,7 @@
 
             <div class="">
                 <div class="flex items-center gap-3">
-                    <x-text-input id="gender-female" type="radio" name="gender" :value="old('gender')" required
+                    <x-text-input id="gender-female" type="radio" name="gender" value="female" required
                         autofocus />
                     <x-input-label for="gender-female" value="Female" />
                 </div>

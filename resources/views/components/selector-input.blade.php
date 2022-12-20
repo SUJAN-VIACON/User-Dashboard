@@ -1,12 +1,14 @@
-@props(['data' => null, 'title' => 'Select here'])
+@props(['data' => null, 'title' => 'Select here', 'value' => null])
+
 <div class="mt-1">
-    <select id="countries" {!! $attributes->merge([
+    <select {!! $attributes->merge([
         'class' =>
             'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500',
     ]) !!}>
-        <option selected>{{ $title }}</option>
-        @foreach ($data as $key => $value)
-            <option value="{{ $key }}">{{ $value }}</option>
+        <option>{{ $title }}</option>
+        @foreach ($data as $key => $val)
+            <option @if ($value == $key) selected @endif value="{{ $key }}">{{ $val }}
+            </option>
         @endforeach
     </select>
 </div>
