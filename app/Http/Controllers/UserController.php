@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use App\Http\Requests\ProfileUpdateRequest;
 
 class UserController extends Controller
 {
@@ -32,10 +33,18 @@ class UserController extends Controller
         ]);
     }
 
+    public function update(ProfileUpdateRequest $request)
+    {
+        $request->user()->fill($request->validated());
+        $request->user()->save();
+
+        return Redirect::route('users.edit',$request->user()->id)->with('status', 'profile-updated');
+    }
+
     public function destroy(Request $request, User $user)
     {
         $user->delete();
 
-        return redirect('/');
+        return redirect(route("users.index"));
     }
 }
